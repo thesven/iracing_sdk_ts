@@ -1,0 +1,88 @@
+{
+  "name": "iracing-data-api",
+  "version": "1.0.0",
+  "description": "A comprehensive TypeScript SDK for the iRacing Data API with support for all documented endpoints",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "test:coverage": "vitest --coverage",
+    "test:ui": "vitest --ui",
+    "lint": "eslint src --ext .ts,.tsx",
+    "lint:fix": "eslint src --ext .ts,.tsx --fix",
+    "typecheck": "tsc --noEmit",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run test && npm run typecheck && npm run lint",
+    "release": "npm run build && npm publish",
+    "docs": "typedoc src/index.ts --out docs --excludePrivate"
+  },
+  "keywords": [
+    "iracing",
+    "api",
+    "sdk",
+    "typescript",
+    "racing",
+    "motorsport",
+    "sim-racing",
+    "data-api"
+  ],
+  "author": {
+    "name": "iRacing Data API SDK",
+    "email": "support@example.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-org/iracing-data-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-org/iracing-data-api/issues"
+  },
+  "homepage": "https://github.com/your-org/iracing-data-api#readme",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/tough-cookie": "^4.0.5",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "@vitest/coverage-v8": "^0.34.0",
+    "@vitest/ui": "^0.34.0",
+    "eslint": "^8.0.0",
+    "tsup": "^7.0.0",
+    "tsx": "^4.0.0",
+    "typedoc": "^0.25.0",
+    "typescript": "^5.0.0",
+    "vitest": "^0.34.6"
+  },
+  "dependencies": {
+    "fetch-cookie": "^3.1.0",
+    "node-fetch": "^3.3.2",
+    "tough-cookie": "^4.1.3",
+    "zod": "^3.22.0"
+  },
+  "peerDependencies": {
+    "typescript": ">=4.5.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
