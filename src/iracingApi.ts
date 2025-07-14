@@ -55,14 +55,12 @@ export class iRacingSDK {
    * @param path - API endpoint path
    * @param options - Fetch options
    * @param query - Query parameters
-   * @param requireAuth - Whether authentication is required
    * @returns Promise resolving to the API response
    */
   private async request<T = any>(
     path: string,
     options: RequestInit = {},
-    query?: Record<string, any>,
-    requireAuth = true
+    query?: Record<string, any>
   ): Promise<T> {
     let url = this.baseUrl + path;
     if (query && Object.keys(query).length > 0) {
@@ -342,7 +340,6 @@ export class iRacingSDK {
    * @param path - API endpoint path
    * @param options - Fetch options
    * @param query - Query parameters
-   * @param requireAuth - Whether authentication is required
    * @param handleChunks - Whether to automatically handle chunked responses
    * @returns Promise resolving to the API response
    */
@@ -350,10 +347,9 @@ export class iRacingSDK {
     path: string,
     options: RequestInit = {},
     query?: Record<string, any>,
-    requireAuth = true,
     handleChunks?: boolean
   ): Promise<T> {
-    const response = await this.request(path, options, query, requireAuth);
+    const response = await this.request(path, options, query);
     
     const shouldHandleChunks = handleChunks !== undefined ? handleChunks : this.autoHandleChunkedResponses;
     

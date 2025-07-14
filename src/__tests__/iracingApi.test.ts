@@ -1,7 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { iRacingSDK } from '../iracingApi';
 import { ApiEndpoints } from '../endpoints';
-import * as types from '../types';
 
 // Mock node-fetch and fetch-cookie
 vi.mock('node-fetch');
@@ -560,7 +559,7 @@ describe('iRacingSDK', () => {
 
     it('should wait when rate limit is reached', async () => {
       const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
-      const setTimeoutSpy = vi.spyOn(global, 'setTimeout').mockImplementation((fn: Function) => {
+      const setTimeoutSpy = vi.spyOn(global, 'setTimeout').mockImplementation((fn: () => void) => {
         fn();
         return 1 as any;
       });
