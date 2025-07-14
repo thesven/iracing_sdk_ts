@@ -15,17 +15,6 @@ A comprehensive TypeScript SDK for the iRacing Data API with **complete coverage
 - ✅ **Professional Quality**: Clean architecture with proper error handling and logging
 - ✅ **Cross-Platform**: Works in both Node.js and browser environments
 
-## Installation
-
-```bash
-# npm
-npm install iracing-data-api
-
-# yarn
-yarn add iracing-data-api
-
-# pnpm
-pnpm add iracing-data-api
 ```
 
 ### Requirements
