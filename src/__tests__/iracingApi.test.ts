@@ -559,7 +559,7 @@ describe('iRacingSDK', () => {
 
     it('should wait when rate limit is reached', async () => {
       const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
-      const setTimeoutSpy = vi.spyOn(global, 'setTimeout').mockImplementation((fn: () => void) => {
+      const setTimeoutSpy = vi.spyOn(globalThis, 'setTimeout').mockImplementation((fn: () => void) => {
         fn();
         return 1 as any;
       });

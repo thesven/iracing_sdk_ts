@@ -1,10 +1,10 @@
 # iRacing Data API SDK
 
-A comprehensive TypeScript SDK for the iRacing Data API with **complete coverage of all 71 documented endpoints**. This professional-grade SDK provides type-safe access to all iRacing data including cars, tracks, series, results, statistics, leagues, and more.
+A comprehensive TypeScript SDK for the iRacing Data API with **complete coverage of all 76+ documented endpoints**. This professional-grade SDK provides type-safe access to all iRacing data including cars, tracks, series, results, statistics, leagues, and more.
 
 ## Features
 
-- ✅ **Complete API Coverage**: All 71 iRacing Data API endpoints implemented (100% coverage)
+- ✅ **Complete API Coverage**: All 76+ iRacing Data API endpoints implemented (100% coverage)
 - ✅ **Strict TypeScript Support**: Full type safety with comprehensive return types for all endpoints
 - ✅ **Chunked Data Handling**: Automatic fetching and combining of large datasets from Amazon S3
 - ✅ **Runtime Validation**: Zod schema validation for parameters and responses
@@ -157,9 +157,28 @@ await sdk.getLeague({ league_id: 123, include_licenses: true }); // ✅ Valid
 
 The SDK includes 100+ TypeScript interfaces covering:
 - **Request Parameters**: All endpoint parameters with proper types
-- **Response Types**: Complete response structures for all 71 endpoints
+- **Response Types**: Complete response structures for all 76+ endpoints
 - **Data Models**: Car, Track, Member, League, and other data structures
 - **API Enums**: Categories, divisions, event types, and more
+
+## Automatic Data Fetching
+
+The iRacing API often returns links to actual data stored on Amazon S3 (for large datasets) or as CSV files (for driver statistics). The SDK automatically fetches and returns the actual data, not just the links:
+
+### CSV Data Handling
+
+Driver statistics endpoints return CSV data that is automatically fetched and returned as strings:
+
+```typescript
+// These endpoints return CSV data strings, not just links
+const ovalStats = await sdk.getDriverStatsOval(); // Returns CSV string
+const roadStats = await sdk.getDriverStatsRoad(); // Returns CSV string
+
+// Parse CSV data as needed for your application
+const lines = ovalStats.split('\n');
+const headers = lines[0].split(',');
+console.log('CSV Headers:', headers);
+```
 
 ## Chunked Data Handling
 
@@ -228,7 +247,7 @@ if (response.chunk_info) {
 
 ## Complete API Coverage
 
-This SDK implements **all 71 iRacing Data API endpoints** organized by category, providing 100% coverage of the official API specification:
+This SDK implements **all 76+ iRacing Data API endpoints** organized by category, providing 100% coverage of the official API specification:
 
 ### Car Data (3 endpoints)
 - `getCars()` - Get all available cars
@@ -241,12 +260,12 @@ This SDK implements **all 71 iRacing Data API endpoints** organized by category,
 - `getEventTypes()` - Get event types (constant data)
 
 ### Driver Stats by Category (6 endpoints)
-- `getDriverStatsOval()` - Oval category driver statistics
-- `getDriverStatsSportsCar()` - Sports car category driver statistics
-- `getDriverStatsFormulaCar()` - Formula car category driver statistics
-- `getDriverStatsRoad()` - Road category driver statistics
-- `getDriverStatsDirtOval()` - Dirt oval category driver statistics
-- `getDriverStatsDirtRoad()` - Dirt road category driver statistics
+- `getDriverStatsOval()` - Oval category driver statistics (returns CSV data)
+- `getDriverStatsSportsCar()` - Sports car category driver statistics (returns CSV data)
+- `getDriverStatsFormulaCar()` - Formula car category driver statistics (returns CSV data)
+- `getDriverStatsRoad()` - Road category driver statistics (returns CSV data)
+- `getDriverStatsDirtOval()` - Dirt oval category driver statistics (returns CSV data)
+- `getDriverStatsDirtRoad()` - Dirt road category driver statistics (returns CSV data)
 
 ### Hosted Sessions (2 endpoints)
 - `getHostedCombinedSessions(params?)` - Sessions that can be joined as driver or spectator
@@ -303,7 +322,7 @@ This SDK implements **all 71 iRacing Data API endpoints** organized by category,
 - `getSeriesSeasonSchedule(params)` - Get season schedule by season ID
 - `getSeriesStats()` - Get series statistics (filter by official:true for standings)
 
-### Statistics (14 endpoints)
+### Statistics (15 endpoints)
 - `getStatsMemberBests(params?)` - Get member best times by car
 - `getStatsMemberCareer(params?)` - Get member career statistics
 - `getStatsMemberDivision(params)` - Get member division standings (authenticated member only)
@@ -558,7 +577,7 @@ npm run test         # Run tests with Vitest
 npm run test:watch   # Watch mode testing
 npm run test:coverage # Generate coverage report with @vitest/coverage-v8
 npm run test:ui      # Visual test UI with @vitest/ui
-npm run test:endpoints # Test all 71 API endpoints
+npm run test:endpoints # Test all 76+ API endpoints
 npm run test:chunked # Comprehensive chunked data endpoint testing
 npm run test:chunked-simple # Simple focused chunked data test
 npm run test:chunked-basic # Basic chunked test with better error handling
@@ -620,7 +639,7 @@ npm run test:coverage
 
 ## Key Features Summary
 
-- **Complete Coverage**: All 71 official iRacing Data API endpoints implemented
+- **Complete Coverage**: All 76+ official iRacing Data API endpoints implemented
 - **Strict Type Safety**: Comprehensive TypeScript support with 100+ response interfaces
 - **Chunked Data Handling**: Automatic fetching and combining of large datasets from S3
 - **Runtime Validation**: Full parameter and response validation using Zod schemas
